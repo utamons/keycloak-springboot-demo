@@ -11,6 +11,8 @@ You should install and configure Keycloak before to start, according to Keycloak
  * Add _http:/localhost:8080/*_ to 'Valid Redirect URIs'
  * 'Access type': public
  * 'Standard flow enabled': true
+ 
+ Update application.properties according to your client and realm configuration.
   
  There are three API endpoints:
  
