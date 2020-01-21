@@ -1,6 +1,6 @@
 # Keycloak demo (Spring Boot)
 
-This is a demo for an Spring Boot application, using OpenID authentication with Keycloak (https//www.keycloak.org).
+This is a demo for an Spring Boot application, using OpenID authentication with Keycloak (https://www.keycloak.org).
 
 You should install and configure Keycloak before to start, according to Keycloak documentation. Some tips:
 
