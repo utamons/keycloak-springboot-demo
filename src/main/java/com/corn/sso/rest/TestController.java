@@ -43,7 +43,6 @@ public class TestController {
 
 	@GetMapping(value = "/nonauth", produces = "application/text")
 	public ResponseEntity<String> nonauth() {
-		System.out.println("got here");
 		return ResponseEntity.of(Optional.of("got nonauth response"));
 	}
 
