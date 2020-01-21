@@ -9,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
@@ -23,7 +24,7 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(
-			AuthenticationManagerBuilder auth) throws Exception {
+			AuthenticationManagerBuilder auth) {
 
 		KeycloakAuthenticationProvider keycloakAuthenticationProvider
 				= keycloakAuthenticationProvider();
@@ -39,32 +40,18 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
 				new SessionRegistryImpl());
 	}
 
-
-	/*@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf()
-				.disable()
-				.exceptionHandling()
-				.and()
-				.sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				.and()
-				.authorizeRequests()
-				.antMatchers(HttpMethod.GET, "/api/test").permitAll()
-				.antMatchers(HttpMethod.OPTIONS).permitAll()
-				.anyRequest().fullyAuthenticated();
-	}*/
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		super.configure(http);
-		http.authorizeRequests()
-				.antMatchers(HttpMethod.GET,"/api/test")
-				.hasRole("USER1")
-				.antMatchers(HttpMethod.GET,"/")
-				.hasRole("USER1")
-				.anyRequest()
-				.permitAll()
+
+		http
+
+				.authorizeRequests()
+				.antMatchers(HttpMethod.GET,"/api/nonauth").permitAll()
+				.antMatchers(HttpMethod.GET,"/api/user1").fullyAuthenticated()
+				.antMatchers(HttpMethod.GET,"/api/user2").fullyAuthenticated()
+				//
+				.anyRequest().fullyAuthenticated();
 		;
 	}
 

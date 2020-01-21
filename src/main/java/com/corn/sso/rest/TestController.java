@@ -41,6 +41,12 @@ public class TestController {
 		return getCredentials();
 	}
 
+	@GetMapping(value = "/nonauth", produces = "application/text")
+	public ResponseEntity<String> nonauth() {
+		System.out.println("got here");
+		return ResponseEntity.of(Optional.of("got nonauth response"));
+	}
+
 	private ResponseEntity<String> getCredentials() {
 		String role = "unknown role";
 
